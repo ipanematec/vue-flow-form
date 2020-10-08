@@ -84,6 +84,7 @@ export default class QuestionModel {
     this.helpText = null
     this.helpTextShow = true
     this.descriptionLink = []
+    this.validation = null
 
     Object.assign(this, options)
 

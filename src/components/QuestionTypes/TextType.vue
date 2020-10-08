@@ -53,13 +53,16 @@
     },
     data() {
       return {
-        inputType: 'text', 
+        inputType: 'text',
         canReceiveFocus: true
       }
-    }, 
+    },
     methods: {
       validate() {
-        if (this.question.mask && this.dataValue.length !== this.question.mask.length) {
+        if (this.question.validation) {
+          if (!this.question.validation(this.dataValue))
+            return false
+        } else if (this.question.mask && this.dataValue.length !== this.question.mask.length) {
           return false
         }
 

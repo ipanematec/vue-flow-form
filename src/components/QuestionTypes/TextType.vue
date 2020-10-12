@@ -4,7 +4,7 @@
       v-if="question.mask"
       ref="input"
       v-bind:mask="question.mask"
-      v-bind:masked="false"
+      v-bind:masked="true"
       v-bind:type="inputType"
       v-bind:value="value"
       v-bind:required="question.required"
@@ -43,7 +43,7 @@
   import BaseType from './BaseType.vue'
   import { QuestionType } from '../../models/QuestionModel'
   import LanguageModel from '../../models/LanguageModel'
-  import TheMask from 'vue-the-mask/src/component'
+  import TheMask from 'ke-the-mask/src/component'
 
   export default {
     extends: BaseType,

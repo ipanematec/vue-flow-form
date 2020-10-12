@@ -35,6 +35,7 @@
     "dist"
   ],
   "scripts": {
+    "prepare": "npm run build:npm",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:npm": "rollup --config build/rollup.config.js && npm run cssmin",

@@ -10,7 +10,7 @@
       :focus="setFocus"
       :blur="unsetFocus"
 
-      @input="debouncedDoSearch"
+      @input="doSearch"
       @keydown.down.prevent="onArrowDown"
       @keydown.up.prevent="onArrowUp"
 
@@ -20,13 +20,23 @@
       spellcheck="false" />
 
     <ul
-      v-if="isLoading || results.length > 0"
+      v-if="isLoading || results"
       class="autocomplete-results"
       @mouseout="resetSelectionIndex" >
       <li
         v-if="isLoading"
         class="autocomplete-result" >
-        {{ this.language.loadingIndicator }}
+        {{ this.language.autocompleteLoading }}
+      </li>
+      <li
+        v-else-if="!isValidSearch"
+        class="autocomplete-result f-invalid" >
+        {{ this.language.autocompleteInvalidSearch }}
+      </li>
+      <li
+        v-else-if="results.length === 0"
+        class="autocomplete-result f-invalid" >
+        {{ this.language.autocompleteNoResults }}
       </li>
       <template v-else>
         <li
@@ -47,7 +57,7 @@
   import BaseType from './BaseType.vue';
   import { QuestionType } from '../../models/QuestionModel';
   import LanguageModel from '../../models/LanguageModel';
-  import debounce from 'vue-debounce/src/debounce';
+  // import debounce from 'vue-debounce/src/debounce';
 
   export default {
     extends: BaseType,
@@ -57,10 +67,11 @@
         // BaseType API:
         canReceiveFocus: true,
 
-        results: [],
+        results: null,
         isLoading: false,
-        currentSelectionIndex: -1,
-        debouncedDoSearch: null
+        isValidSearch: null,
+        currentSelectionIndex: -1
+        // debouncedDoSearch: null
       };
     },
     methods: {
@@ -73,11 +84,20 @@
         const timeout = setTimeout(() => { this.isLoading = true }, 200);
         this.results = await this.question.searchFunction(this.$refs.input.value) ?? [];
         clearTimeout(timeout);
+
+        if (this.results === 'invalid') {
+          this.isValidSearch = false;
+          this.results = [];
+        } else {
+          this.isValidSearch = true;
+        }
+
         this.isLoading = false;
       },
       selectResult(result) {
         this.$refs.input.value = result.label;
 
+        this.results = null;
         this.resetSelectionIndex();
 
         // BaseType API:
@@ -90,7 +110,7 @@
         this.currentSelectionIndex = index;
       },
       onArrowDown() {
-        if (this.currentSelectionIndex < this.results.length - 1)
+        if (this.currentSelectionIndex < this.results?.length - 1)
           ++this.currentSelectionIndex;
       },
       onArrowUp() {
@@ -103,19 +123,19 @@
 
       // Called by BaseType API:
       onEnter() {
-        if (this.currentSelectionIndex === -1)
+        if (this.currentSelectionIndex < 0 || this.currentSelectionIndex >= this.results?.length)
           return;
         this.selectResult(this.results[this.currentSelectionIndex]);
       }
     },
     computed: {
       placeholder() {
-        return this.question.placeholder || this.language.placeholderAutocomplete
+        return this.question.placeholder || this.language.autocompletePlaceholder
       }
-    },
-    created() {
-      this.debouncedDoSearch = debounce(this.doSearch.bind(this), '200ms');
     }
+    // created() {
+    //   this.debouncedDoSearch = debounce(this.doSearch.bind(this), '200ms');
+    // }
   };
 </script>
 
@@ -132,6 +152,12 @@
     cursor: pointer;
     font-size: 1.7rem;
     font-weight: normal;
+  }
+
+  .autocomplete-result.f-invalid {
+    margin-top: 0.5rem;
+    cursor: inherit;
+    font-size: inherit;
   }
 
   .autocomplete-result.currently-selected {

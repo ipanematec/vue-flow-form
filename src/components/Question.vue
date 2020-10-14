@@ -52,8 +52,8 @@
         <p v-if="question.description || question.descriptionLink.length !== 0" class="description">
           <span v-if="question.description">{{ question.description }}</span>
           <a
-            v-for="(link, index) in question.descriptionLink" 
-            class="f-link" 
+            v-for="(link, index) in question.descriptionLink"
+            class="f-link"
             v-bind:key="'m' + index"
             v-bind:href="link.url"
             v-bind:target="link.target"
@@ -62,7 +62,7 @@
 
       </div>
       <div class="animate fade-in f-enter" v-if="showOkButton()">
-        <button 
+        <button
           class="o-btn-action"
           type="button"
           ref="button"
@@ -73,7 +73,7 @@
             <span v-if="question.type === QuestionType.SectionBreak">{{ language.continue }}</span>
             <span v-else>{{ language.ok }}</span>
         </button>
-        <a 
+        <a
           class="f-enter-desc"
           href="#"
           v-if="question.type !== QuestionType.LongText || !isMobile"
@@ -106,8 +106,9 @@
   import FlowFormSectionBreakType from './QuestionTypes/SectionBreakType.vue'
   import FlowFormTextType from './QuestionTypes/TextType.vue'
   import FlowFormUrlType from './QuestionTypes/UrlType.vue'
+  import FlowFormAutocompleteType from './QuestionTypes/AutocompleteType.vue'
   import { IsMobile } from '../mixins/IsMobile'
-  
+
 
   export default {
     name: 'FlowFormQuestion',
@@ -121,7 +122,8 @@
       FlowFormPhoneType,
       FlowFormSectionBreakType,
       FlowFormTextType,
-      FlowFormUrlType
+      FlowFormUrlType,
+      FlowFormAutocompleteType
     },
     props: {
       question: QuestionModel,
@@ -160,7 +162,7 @@
        */
       focusField() {
         const el = this.$refs.questionComponent
-        
+
         el && el.focus()
       },
 
@@ -184,7 +186,7 @@
 
       /**
        * Emits "answer" event and calls "onEnter" method on Enter press
-       */ 
+       */
       onEnter($event) {
         const q = this.$refs.questionComponent
 
@@ -203,11 +205,11 @@
         if (q) {
           this.returnFocus()
           this.$emit('answer', q)
-          
+
           q.onEnter()
         }
       },
-      
+
       /**
        * Check if the "OK" button should be shown.
        */

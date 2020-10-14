@@ -31,6 +31,8 @@ export default class LanguageModel {
     this.ariaSubmitText = 'Press to submit'
     this.ariaMultipleChoice = 'Press :letter to select'
     this.ariaTypeAnswer = 'Type your answer here'
+    this.loadingIndicator = 'Loading...'
+    this.placeholderAutocomplete = 'Start typing to see options...'
 
     Object.assign(this, options || {})
   }
@@ -44,10 +46,8 @@ export default class LanguageModel {
       if (this[word]) {
         return '<span class="f-uppercase">' + this[word] + '</span>'
       }
-      
+
       return match
     })
   }
 }
-
-

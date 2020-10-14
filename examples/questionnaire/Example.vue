@@ -1,5 +1,5 @@
 // Create and setup your form here
- 
+
 <template>
   <div>
     <header>
@@ -32,13 +32,13 @@
             </span>
           </p>
           <p class="description">Note: No data will be saved and/or sent in this demo.</p>
-        </div>  
+        </div>
       </template>
 
       <!-- We've overriden the default "completeButton" slot content -->
       <template v-slot:completeButton>
         <div class="f-submit" v-if="!submitted">
-          <button 
+          <button
             class="o-btn-action"
             ref="button"
             type="submit"
@@ -86,6 +86,28 @@
         language: new LanguageModel(),
         // Create question list with QuestionModel instances
         questions: [
+          new QuestionModel({
+            title: "Autocomplete",
+            type: QuestionType.Autocomplete,
+            required: true,
+            searchFunction(query) {
+              if (query.length === 0)
+                return;
+              return new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve(
+                    [
+                      { label: 'Germany', value: '7' },
+                      { label: 'Brazil', value: '1' }
+                    ]
+                    .filter(item =>
+                      item.label.toLowerCase().includes(query.toLowerCase())
+                    )
+                  );
+                }, Math.random() * 0);
+              });
+            }
+          }),
           new QuestionModel({
             id: 'first_name',
             tagline: 'Hi! Welcome to our demo survey 😊',
@@ -249,7 +271,7 @@
         // completeButton slot.
         this.onSendData()
       },
-      
+
       onSendData() {
         // Set `submitted` to true so the form knows not to allow back/forward
         // navigation anymore.

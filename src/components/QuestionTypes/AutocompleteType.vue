@@ -81,7 +81,7 @@
 
         this.resetSelectionIndex();
 
-        const timeout = setTimeout(() => { this.isLoading = true }, 200);
+        const timeout = setTimeout(() => { this.isLoading = true }, 800);
         this.results = await this.question.searchFunction(this.$refs.input.value) ?? [];
         clearTimeout(timeout);
 

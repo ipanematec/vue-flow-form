@@ -1,6 +1,7 @@
 import commonjs from '@rollup/plugin-commonjs'
 import vue from 'rollup-plugin-vue'
-import buble from '@rollup/plugin-buble'
+// import buble from '@rollup/plugin-buble'
+import babel from 'rollup-plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import cleanup from 'rollup-plugin-cleanup'
 import css from 'rollup-plugin-css-only'
@@ -49,9 +50,8 @@ export default [
         ]
       }),
       css(),
-      buble({
-        objectAssign: 'Object.assign',
-        jsx: 'h'
+      babel({
+        exclude: 'node_modules/**'
       }),
       commonjs(),
       resolve({
@@ -86,9 +86,8 @@ export default [
         ]
       }),
       css(),
-      buble({
-        objectAssign: 'Object.assign',
-        jsx: 'h'
+      babel({
+        exclude: 'node_modules/**'
       }),
       commonjs(),
       resolve({
@@ -123,9 +122,8 @@ export default [
         ]
       }),
       css(),
-      buble({
-        objectAssign: 'Object.assign',
-        jsx: 'h'
+      babel({
+        exclude: 'node_modules/**'
       }),
       commonjs(),
       resolve({
@@ -162,9 +160,8 @@ export default [
         minimize: true
       }),
       css(),
-      buble({
-        objectAssign: 'Object.assign',
-        jsx: 'h'
+      babel({
+        exclude: 'node_modules/**'
       }),
       commonjs(),
       resolve({

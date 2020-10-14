@@ -47,7 +47,7 @@
   import BaseType from './BaseType.vue';
   import { QuestionType } from '../../models/QuestionModel';
   import LanguageModel from '../../models/LanguageModel';
-  import { debounce } from 'vue-debounce';
+  import debounce from 'vue-debounce/src/debounce';
 
   export default {
     extends: BaseType,

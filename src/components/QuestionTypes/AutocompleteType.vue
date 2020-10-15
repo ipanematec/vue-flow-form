@@ -19,22 +19,29 @@
       autocapitalize="off"
       spellcheck="false" />
 
-    <ul
+    <transition-group
+      name="autocomplete-transitions"
+      :css="false"
+
+      tag="ul"
       v-if="isLoading || results"
       class="autocomplete-results"
       @mouseout="resetSelectionIndex" >
       <li
         v-if="isLoading"
+        :key="'loading'"
         class="autocomplete-result" >
         {{ this.language.autocompleteLoading }}
       </li>
       <li
         v-else-if="!isValidSearch"
+        :key="'invalid'"
         class="autocomplete-result f-invalid" >
         {{ this.language.autocompleteInvalidSearch }}
       </li>
       <li
         v-else-if="results.length === 0"
+        :key="'empty'"
         class="autocomplete-result f-invalid" >
         {{ this.language.autocompleteNoResults }}
       </li>
@@ -49,7 +56,7 @@
           {{ result.label }}
         </li>
       </template>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -59,7 +66,6 @@
   import LanguageModel from '../../models/LanguageModel';
   // import debounce from 'vue-debounce/src/debounce';
 
-  // TODO Use transitions: https://v3.vuejs.org/guide/transitions-list.html#list-move-transitions
   // TODO Consider using https://github.com/foxbenjaminfox/vue-async-computed
 
   export default {
@@ -130,6 +136,28 @@
           return;
         this.selectResult(this.results[this.currentSelectionIndex]);
       }
+
+      // TODO Allow client app to use GSAP ( https://v3.vuejs.org/guide/transitions-list.html#staggering-list-transitions )
+      // beforeEnter(el) {
+      //   el.style.opacity = 0
+      //   el.style.height = 0
+      // },
+      // enter(el, done) {
+      //   gsap.to(el, {
+      //     duration: 0.1,
+      //     opacity: 1,
+      //     height: '1.6em',
+      //     onComplete: done
+      //   })
+      // },
+      // leave(el, done) {
+      //   gsap.to(el, {
+      //     duration: 0.1,
+      //     opacity: 0,
+      //     height: 0,
+      //     onComplete: done
+      //   })
+      // }
     },
     computed: {
       placeholder() {
@@ -166,4 +194,13 @@
   .autocomplete-result.currently-selected {
     font-weight: bold;
   }
+
+  /* TODO Allow client app to use GSAP ( https://v3.vuejs.org/guide/transitions-list.html#staggering-list-transitions ) */
+  /* .autocomplete-transitions-move {
+    transition: all 0.1s ease;
+  }
+  .autocomplete-transitions-enter-active,
+  .autocomplete-transitions-leave-active {
+    display: none;
+  } */
 </style>

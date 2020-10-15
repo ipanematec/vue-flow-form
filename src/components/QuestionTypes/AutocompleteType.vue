@@ -59,7 +59,8 @@
   import LanguageModel from '../../models/LanguageModel';
   // import debounce from 'vue-debounce/src/debounce';
 
-  // TODO Use https://github.com/foxbenjaminfox/vue-async-computed
+  // TODO Use transitions: https://v3.vuejs.org/guide/transitions-list.html#list-move-transitions
+  // TODO Consider using https://github.com/foxbenjaminfox/vue-async-computed
 
   export default {
     extends: BaseType,

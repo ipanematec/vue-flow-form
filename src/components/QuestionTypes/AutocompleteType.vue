@@ -59,6 +59,8 @@
   import LanguageModel from '../../models/LanguageModel';
   // import debounce from 'vue-debounce/src/debounce';
 
+  // TODO Use https://github.com/foxbenjaminfox/vue-async-computed
+
   export default {
     extends: BaseType,
     name: QuestionType.Autocomplete,

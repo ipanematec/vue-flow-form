@@ -85,7 +85,6 @@ export default class QuestionModel {
     this.helpTextShow = true
     this.descriptionLink = []
     this.validation = null
-    this.searchFunction = null
 
     Object.assign(this, options)
 

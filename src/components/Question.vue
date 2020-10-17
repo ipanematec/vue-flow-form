@@ -106,7 +106,6 @@
   import FlowFormSectionBreakType from './QuestionTypes/SectionBreakType.vue'
   import FlowFormTextType from './QuestionTypes/TextType.vue'
   import FlowFormUrlType from './QuestionTypes/UrlType.vue'
-  import FlowFormAutocompleteType from './QuestionTypes/AutocompleteType.vue'
   import { IsMobile } from '../mixins/IsMobile'
 
 
@@ -122,8 +121,7 @@
       FlowFormPhoneType,
       FlowFormSectionBreakType,
       FlowFormTextType,
-      FlowFormUrlType,
-      FlowFormAutocompleteType
+      FlowFormUrlType
     },
     props: {
       question: QuestionModel,

@@ -31,10 +31,6 @@ export default class LanguageModel {
     this.ariaSubmitText = 'Press to submit'
     this.ariaMultipleChoice = 'Press :letter to select'
     this.ariaTypeAnswer = 'Type your answer here'
-    this.autocompletePlaceholder = 'Start typing to see options...'
-    this.autocompleteLoading = 'Loading...'
-    this.autocompleteNoResults = 'No results'
-    this.autocompleteInvalidSearch = 'Invalid search'
 
     Object.assign(this, options || {})
   }

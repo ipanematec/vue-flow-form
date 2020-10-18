@@ -236,6 +236,10 @@
         }
 
         return q.showInvalid()
+      },
+
+      ignoreTabPress() {
+        return this.$refs.questionComponent?.ignoreTabPress;
       }
     },
     computed: {

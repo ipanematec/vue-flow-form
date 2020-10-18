@@ -16,7 +16,7 @@
           v-bind:reverse="reverse"
         />
 
-        <!-- Complete/Submit screen slots -->   
+        <!-- Complete/Submit screen slots -->
         <div v-if="isOnLastStep" class="animate fade-in-up field-submittype">
           <slot name="complete">
             <!-- Default content for the "complete" slot -->
@@ -29,17 +29,17 @@
 
           <slot name="completeButton">
             <!-- Default content for the "completeButton" slot -->
-            <button 
+            <button
               class="o-btn-action"
-              ref="button" 
-              type="button" 
-              href="#" 
-              v-on:click.prevent="submit()" 
+              ref="button"
+              type="button"
+              href="#"
+              v-on:click.prevent="submit()"
               v-if="!submitted"
               v-bind:aria-label="language.ariaSubmitText">
                 <span>{{ language.submitText }}</span>
             </button>
-            <a 
+            <a
               class="f-enter-desc"
               href="#"
               v-on:click.prevent="submit()"
@@ -138,7 +138,7 @@
         default: () => new LanguageModel()
       },
       progressbar: {
-        type: Boolean, 
+        type: Boolean,
         default: true
       }
     },
@@ -307,6 +307,9 @@
        * Global key listeners, listen for Enter or Tab key events.
        */
       onKeyDownListener(e) {
+        if (e.key === 'Tab' && this.activeQuestionComponent()?.ignoreTabPress())
+          return true;
+
         if (e.key !== 'Tab' || this.submitted) {
           return
         }
@@ -319,7 +322,7 @@
           this.goToPreviousQuestion()
         } else {
           e.preventDefault()
-          
+
           const q = this.activeQuestionComponent()
 
           if (q.shouldFocus()) {
@@ -331,9 +334,12 @@
             this.reverse = false
           }
         }
-      }, 
+      },
 
       onKeyUpListener(e) {
+        if (e.key === 'Tab' && this.activeQuestionComponent()?.ignoreTabPress())
+          return true;
+
         if (e.shiftKey || ['Tab', 'Enter'].indexOf(e.key) === -1 || this.submitted) {
           return
         }
@@ -345,7 +351,7 @@
         } else {
           if (e.key === 'Enter') {
             this.emitEnter()
-          } 
+          }
 
           e.stopPropagation()
           this.reverse = false
@@ -398,7 +404,7 @@
         }
 
         const q = this.activeQuestion
-  
+
         if (q && !q.required) {
           return true
         }
@@ -430,7 +436,7 @@
                 // No more questions left - set "completed" to true
                 this.completed = true
                 this.activeQuestionIndex = this.questionListActivePath.length
-                
+
                 this.$refs.button && this.$refs.button.focus()
               }
             })

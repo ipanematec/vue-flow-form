@@ -217,6 +217,10 @@
       setQuestions() {
         this.setQuestionListActivePath()
         this.setQuestionList()
+
+        this.$nextTick(() => {
+          this.$emit('questions-state-updated');
+        });
       },
 
       /**

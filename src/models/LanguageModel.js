@@ -24,6 +24,7 @@ export default class LanguageModel {
     this.percentCompleted = ':percent% completed'
     this.invalidPrompt = 'Please fill out the field correctly'
     this.thankYouText = 'Thank you!'
+    this.successText = 'Your submission has been sent.'
     this.ariaOk = 'Press to continue'
     this.ariaRequired = 'This step is required'
     this.ariaPrev = 'Previous step'
@@ -44,10 +45,8 @@ export default class LanguageModel {
       if (this[word]) {
         return '<span class="f-string-em">' + this[word] + '</span>'
       }
-      
+
       return match
     })
   }
 }
-
-

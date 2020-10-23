@@ -1,5 +1,5 @@
 // Create and setup your form here
- 
+
 <template>
   <div>
     <header class="vff-header">
@@ -33,13 +33,13 @@
             </span>
           </p>
           <p class="f-description">Note: No data will be saved and/or sent in this demo.</p>
-        </div>  
+        </div>
       </template>
 
       <!-- We've overriden the default "completeButton" slot content -->
       <template v-slot:completeButton>
         <div class="f-submit" v-if="!submitted">
-          <button 
+          <button
             class="o-btn-action"
             ref="button"
             type="submit"
@@ -87,6 +87,54 @@
         language: new LanguageModel(),
         // Create question list with QuestionModel instances
         questions: [
+          // new QuestionModel({
+          //   title: "Autocomplete",
+          //   type: QuestionType.Autocomplete,
+          //   required: true,
+          //   async searchFunction(query) {
+          //     if (query.length === 0)
+          //       return;
+          //
+          //     // const url = new URL("http://localhost:3000/municipalities/search.json");
+          //     // url.searchParams.append('q', query);
+          //     // const response = await fetch(url);
+          //     // const json = await response.json();
+          //     //
+          //     // return json.map(item => (
+          //     //   {
+          //     //     value: item.id,
+          //     //     label: `${item.name} - ${item.state_acronym}`
+          //     //   }
+          //     // ));
+          //
+          //     return new Promise((resolve) => {
+          //       setTimeout(() => {
+          //         resolve(
+          //           [
+          //             { label: 'Germany', value: '1' },
+          //             { label: 'Brazil', value: '2' },
+          //             { label: 'Africa', value: '3' },
+          //             { label: 'Asia', value: '4' },
+          //             { label: 'Australia', value: '5' },
+          //             { label: 'Antarctica', value: '6' },
+          //             { label: 'Europe', value: '7' },
+          //             { label: 'America', value: '8' },
+          //             { label: 'Ocean', value: '9' },
+          //             { label: 'Earth', value: '10' },
+          //             { label: 'Moon', value: '11' },
+          //             { label: 'Sun', value: '12' },
+          //             { label: 'North America', value: '13' },
+          //             { label: 'South America', value: '14' }
+          //           ]
+          //           .filter(item =>
+          //             item.label.toLowerCase().includes(query.toLowerCase())
+          //           )
+          //           .slice(0, 5)
+          //         );
+          //       }, Math.random() * 0); // <- simulate network
+          //     });
+          //   }
+          // }),
           new QuestionModel({
             id: 'first_name',
             tagline: 'Hi! Welcome to our demo survey 😊',
@@ -250,7 +298,7 @@
         // completeButton slot.
         this.onSendData()
       },
-      
+
       onSendData() {
         // Set `submitted` to true so the form knows not to allow back/forward
         // navigation anymore.

@@ -1,6 +1,7 @@
 // Form template and logic
 
 <template>
+  <div class="vff-wrapper" :class="{'vff-wrapper-standalone': standalone}">
   <div class="vff" :class="{'vff-not-standalone': !standalone}">
     <div class="f-container">
       <div class="f-form-wrap">
@@ -114,6 +115,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 

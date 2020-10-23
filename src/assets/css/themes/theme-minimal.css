@@ -8,7 +8,7 @@
   basic theme color and font styles
 */
 
-:root {
+.vff-wrapper {
   --vff-bg-color: #fff;
   --vff-main-text-color: #181818;
   --vff-secondary-text-color: #999;
@@ -28,7 +28,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
-body {
+body, .vff-wrapper {
   /*override if needed when using not-standalone option*/
   margin: 0;
   background-color: var(--vff-bg-color);
@@ -140,7 +140,7 @@ header.vff-header svg.f-logo{
 .vff .o-btn-action:focus {
   background-color: var(--vff-main-text-color);
   opacity: .9;
-} 
+}
 
 /*footer*/
 .vff-footer .footer-inner-wrap{
@@ -202,7 +202,7 @@ header.vff-header svg.f-logo{
 */
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  .vff-wrapper {
     --vff-bg-color: #313640;
     --vff-main-text-color: #fff;
     --vff-secondary-text-color: #AEB6BF;
@@ -232,7 +232,7 @@ header.vff-header svg.f-logo{
   .vff .f-arrow-down svg {
     fill: var(--vff-main-accent-color);
   }
-  
+
   .vff .text-success{
     color: var(--vff-main-accent-color);
   }

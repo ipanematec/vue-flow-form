@@ -148,9 +148,9 @@
         type: Boolean,
         default: true
       },
-      standalone: {
-        type: Boolean,
-        default: true
+      defaultQuestionIndex: {
+        type: Number,
+        default: 0
       }
     },
     data() {
@@ -166,6 +166,15 @@
     watch: {
       completed() {
         this.emitComplete()
+      },
+      defaultQuestionIndex: {
+        handler(value) {
+          if (!this.activeQuestionIndex && value) {
+            this.activeQuestionIndex = value;
+            this.setQuestions();
+          }
+        },
+        immediate: true
       }
     },
     mounted() {

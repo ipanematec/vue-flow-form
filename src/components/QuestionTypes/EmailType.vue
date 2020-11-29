@@ -18,7 +18,10 @@
     },
     methods: {
       validate() {
-        return this.hasValue && /^[^@]+@.+[^.]$/.test(this.dataValue)
+        // From https://emailregex.com
+        return this.hasValue &&
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          .test(this.dataValue)
       }
     }
   }
